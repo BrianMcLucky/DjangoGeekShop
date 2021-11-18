@@ -1,3 +1,4 @@
+from django.http import JsonResponse
 from django.shortcuts import render
 
 
@@ -11,9 +12,8 @@ def index(request):
 
 
 def products(request):
+
     content = {
         'title': 'Geekshop - Каталог',
     }
     return render(request, 'products.html', content)
-
-
