@@ -2,6 +2,7 @@ import json
 import os.path
 
 from django.shortcuts import render
+from mainapp.models import Product, ProductCategory
 
 MODULE_DIR = os.path.dirname(__file__)
 
@@ -20,7 +21,8 @@ def products(request):
 
     content = {
         'title': 'Geekshop - Каталог', }
-    content['products'] = json.load(open(file_path, encoding='utf-8'))
+    content['products'] = Product.objects.all()
+    content['categories'] = ProductCategory.objects.all()
 
 
     return render(request, 'mainapp/products.html', content)
