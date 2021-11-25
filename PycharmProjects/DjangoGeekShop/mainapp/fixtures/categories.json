@@ -1,7 +1,7 @@
 [
   {
     "model": "mainapp.productcategory",
-    "pk": 1,
+    "pk": 4,
     "fields": {
       "name": "одежда",
       "description": "описание класса одежда"

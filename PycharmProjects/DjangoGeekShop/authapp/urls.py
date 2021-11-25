@@ -21,8 +21,8 @@ from django.conf.urls.static import static
 
 from mainapp.views import products
 
-app_name = 'mainapp'
+app_name = 'authapp'
 
 urlpatterns = [
-   path('', products, name='products'),
+   # path('', products, name='authapp'),
 ]
