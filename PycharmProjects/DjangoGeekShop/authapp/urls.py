@@ -17,7 +17,7 @@ Including another URLconf
 
 from django.urls import path
 
-from authapp.views import login, register
+from authapp.views import login, register, logout
 
 from django.conf.urls.static import static
 
@@ -28,5 +28,6 @@ app_name = 'authapp'
 urlpatterns = [
     path('login/', login, name='login'),
     path('register/', register, name='register'),
+    path('logout/', logout, name='logout'),
 
 ]

@@ -121,10 +121,12 @@ STATICFILES_DIRS = (BASE_DIR / 'static',)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = (BASE_DIR / 'media')
 
-AUTH_USER_MODEL = 'authapp.ShopUser'
+
 
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-fieldcls
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTH_USER_MODEL = 'authapp.User'
