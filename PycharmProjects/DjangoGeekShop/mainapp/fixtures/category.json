@@ -17,7 +17,7 @@
   },
   {
     "model": "mainapp.productcategory",
-    "pk": 8,
+    "pk": 6,
     "fields": {
       "name": "обувь",
       "description": "описание класса обувь"
@@ -25,7 +25,7 @@
   },
   {
     "model": "mainapp.productcategory",
-    "pk": 9,
+    "pk": 7,
     "fields": {
       "name": "Новинки",
       "description": ""
@@ -33,7 +33,7 @@
   },
   {
     "model": "mainapp.productcategory",
-    "pk": 10,
+    "pk": 8,
     "fields": {
       "name": "Подарки",
       "description": ""

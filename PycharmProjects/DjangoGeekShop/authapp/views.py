@@ -7,7 +7,7 @@ from django.http import HttpResponseRedirect
 
 
 # Create your views here.
-
+from baskets.models import Basket
 
 
 def login(request):
@@ -55,14 +55,14 @@ def profile(request):
         form = UserProfileForm(instance=request.user, data=request.POST, files=request.FILES)
         if form.is_valid():
             form.save()
-            messages.success(request, 'Profile updated')
+
         else:
             print(form.errors)
-    else:
-        form = UserProfileForm()
+
     content ={
         'title': 'Geekshop | Profile',
-        'form': form
+        'form': UserProfileForm(instance=request.user),
+        'baskets': Basket.objects.filter(user=request.user)
     }
     return render(request, 'authapp/profile.html', content)
 
