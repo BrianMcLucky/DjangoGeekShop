@@ -1,12 +1,14 @@
 from django.shortcuts import render
 from django.urls import reverse
 
-from authapp.forms import UserLoginForm, UserRegisterForm
+from authapp.forms import UserLoginForm, UserRegisterForm, UserProfileForm
 from django.contrib import auth, messages
 from django.http import HttpResponseRedirect
 
 
 # Create your views here.
+
+
 
 def login(request):
     if request.method == 'POST':
@@ -46,6 +48,25 @@ def register(request):
         'form': form
     }
     return render(request, 'authapp/register.html', content)
+
+
+def profile(request):
+    if request.method == 'POST':
+        form = UserProfileForm(instance=request.user, data=request.POST, files=request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Profile updated')
+        else:
+            print(form.errors)
+    else:
+        form = UserProfileForm()
+    content ={
+        'title': 'Geekshop | Profile',
+        'form': form
+    }
+    return render(request, 'authapp/profile.html', content)
+
+
 
 
 def logout(request):
