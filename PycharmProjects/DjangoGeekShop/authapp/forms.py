@@ -66,13 +66,12 @@ class UserProfileForm(UserChangeForm):
     def clean_image(self):
         img = self.cleaned_data['image']
         file_size = self.file.size
-        limit = 1.0
 
         if not img:
             raise ValidationError('No image.')
 
         else:
-            if file_size > limit*1024*1024:
+            if file_size > 1*1024*1024:
                 raise ValidationError('File too large, max size 1 mb.')
 
         return img
