@@ -48,6 +48,7 @@ class UserRegisterForm(UserCreationForm):
 class UserProfileForm(UserChangeForm):
     image = forms.ImageField(widget=forms.FileInput(), required=False)
     age = forms.IntegerField(widget=forms.NumberInput(), required=False)
+    first_name = forms.CharField(widget=forms.TextInput(), validators=[validate_name])
 
     class Meta:
         model = User
