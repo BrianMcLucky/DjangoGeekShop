@@ -1,12 +1,12 @@
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
-from django.urls import reverse
-
-from authapp.forms import UserLoginForm, UserRegisterForm, UserProfileForm
 from django.contrib import auth, messages
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
+from django.shortcuts import render
 
 # Create your views here.
+from django.urls import reverse
+
+from authapp.forms import UserLoginForm, UserRegisterForm, UserProfilerForm
 from baskets.models import Basket
 
 
@@ -20,15 +20,15 @@ def login(request):
             if user.is_active:
                 auth.login(request, user)
                 return HttpResponseRedirect(reverse('index'))
-        else:
-            print(form.errors)
+        # else:
+        #     print(form.errors)
     else:
         form = UserLoginForm()
-    content = {
-        'title': 'Geekshop | Login',
+    context = {
+        'title': 'Geekshop | Авторизация',
         'form': form
     }
-    return render(request, 'authapp/login.html', content)
+    return render(request, 'authapp/login.html', context)
 
 
 def register(request):
@@ -36,49 +36,35 @@ def register(request):
         form = UserRegisterForm(data=request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request, 'Registration success')
+            messages.success(request, 'Вы успешно зарегистрировались')
             return HttpResponseRedirect(reverse('authapp:login'))
         else:
             print(form.errors)
     else:
         form = UserRegisterForm()
-
-    content = {
-        'title': 'Geekshop | Registration',
-        'form': form
-    }
-    return render(request, 'authapp/register.html', content)
+    context = {
+        'title': 'Geekshop | Регистрация',
+        'form': form}
+    return render(request, 'authapp/register.html', context)
 
 
 @login_required
 def profile(request):
     if request.method == 'POST':
-        form = UserProfileForm(instance=request.user, data=request.POST, files=request.FILES)
+        form = UserProfilerForm(instance=request.user, data=request.POST, files=request.FILES)
         if form.is_valid():
+            messages.set_level(request, messages.SUCCESS)
+            messages.success(request, 'Вы успешно сохранили профайл')
             form.save()
-            messages.success(request, 'Profile change success')
-
-
         else:
             messages.set_level(request, messages.ERROR)
             messages.error(request, form.errors)
-
-    total_quantity = 0
-    total_sum = 0
-    baskets = Basket.objects.filter(user=request.user)
-    for basket in baskets:
-        total_sum = basket.sum()
-        total_quantity += basket.quantity
-
-    content = {
-        'title': 'Geekshop | Profile',
-        'form': UserProfileForm(instance=request.user),
-        'baskets': baskets,
-        'total_sum': total_sum,
-        'total_quantity': total_quantity,
-
+    context = {
+        'title': 'Geekshop | Профайл',
+        'form': UserProfilerForm(instance=request.user),
+        'baskets': Basket.objects.filter(user=request.user),
     }
-    return render(request, 'authapp/profile.html', content)
+    return render(request, 'authapp/profile.html', context)
 
 
 def logout(request):

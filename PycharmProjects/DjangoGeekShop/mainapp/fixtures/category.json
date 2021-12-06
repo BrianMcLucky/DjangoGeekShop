@@ -3,24 +3,24 @@
     "model": "mainapp.productcategory",
     "pk": 4,
     "fields": {
-      "name": "одежда",
-      "description": "описание класса одежда"
+      "name": "Одежда",
+      "description": "Описание для класса одежды"
     }
   },
   {
     "model": "mainapp.productcategory",
     "pk": 5,
     "fields": {
-      "name": "аксесуары",
-      "description": "описание класса аксесуары"
+      "name": "Аксесуары",
+      "description": ""
     }
   },
   {
     "model": "mainapp.productcategory",
     "pk": 6,
     "fields": {
-      "name": "обувь",
-      "description": "описание класса обувь"
+      "name": "Обувь",
+      "description": ""
     }
   },
   {

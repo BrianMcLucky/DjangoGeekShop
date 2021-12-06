@@ -1,25 +1,43 @@
-import os.path
-
 from django.shortcuts import render
-from mainapp.models import Product, ProductCategory
 
-MODULE_DIR = os.path.dirname(__file__)
+import json
+import os
 
+from django.views.generic import DetailView
 
+from mainapp.models import Product,ProductCategory
+
+MODULE_DIR =os.path.dirname(__file__)
 # Create your views here.
 
 def index(request):
-    content = {
-        'title': 'Geekshop',
-    }
-    return render(request, 'mainapp/index.html', content)
+    context = {
+        'title': 'Geekshop', }
+    return render(request, 'mainapp/index.html', context)
 
 
 def products(request):
-    content = {
-        'title': 'Geekshop - Каталог',
+    # file_path = os.path.join(MODULE_DIR,'fixtures/goods.json')
+    context = {
+        'title': 'Geekshop | Каталог',
     }
-    content['products'] = Product.objects.all()
-    content['categories'] = ProductCategory.objects.all()
 
-    return render(request, 'mainapp/products.html', content)
+    # context['products'] = json.load(open(file_path,encoding='utf-8'))
+    context['products'] = Product.objects.all()
+    context['categories'] = ProductCategory.objects.all()
+    return render(request, 'mainapp/products.html', context)
+
+
+class ProductDetail(DetailView):
+
+    model = Product
+    template_name = 'mainapp/detail.html'
+    # context_object_name = 'product'
+
+
+    def get_context_data(self, category_id=None, *args, **kwargs):
+        context = super(ProductDetail, self).get_context_data(**kwargs)
+        product = self.get_object()
+        context['product'] = product
+
+        return context
