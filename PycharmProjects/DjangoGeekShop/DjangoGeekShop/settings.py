@@ -42,7 +42,6 @@ INSTALLED_APPS = [
     'baskets',
     'admins'
 
-
 ]
 
 MIDDLEWARE = [
