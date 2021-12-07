@@ -6,7 +6,7 @@
     <div id="layoutSidenav_content">
         <main>
             <div class="container-fluid">
-                <h1 class="mt-4">Редактирование пользователя | {{ user_elect.username }}</h1>
+                <h1 class="mt-4">Редактирование пользователя | {{ user_select.username }}</h1>
                 <div class="card-body">
                     <form action="{% url 'admins:admin_users_update' user_select.id %}" method="post" enctype="multipart/form-data">
                         {% csrf_token %}
@@ -34,12 +34,12 @@
                             </div>
                         </div>
                         <div class="form-row">
-                            <div class="col-lg-6">
+                            <div class="col-lg-5">
                                 <label class="small mb-1" for="inputUsername{{ form.username.id_for_label }}">Имя пользователя</label>
                                 {{ form.username}}
 
                             </div>
-                            <div class="col-lg-6">
+                            <div class="col-lg-5">
                                 <label class="small mb-1" for="inputEmailAddress{{ form.email.id_for_label }}">Адрес электронной
                                     почты</label>
                                 {{ form.email }}
