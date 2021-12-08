@@ -60,7 +60,7 @@ class ProductFormAdmin(forms.ModelForm):
     description = forms.CharField(widget=forms.TextInput(), required=False)
     price = forms.DecimalField(widget=forms.DecimalField)
     quantity = forms.IntegerField(widget=forms.IntegerField())
-    # category = forms.ForeignKey(ProductCategory)
+    # category = forms.ModelChoiceField(ProductCategory)
 
     class Meta():
         model = Product

@@ -16,14 +16,18 @@ def index(request):
     return render(request, 'mainapp/index.html', context)
 
 
-def products(request):
-    # file_path = os.path.join(MODULE_DIR,'fixtures/goods.json')
+def products(request, pk=None):
+
     context = {
         'title': 'Geekshop | Каталог',
     }
 
-    # context['products'] = json.load(open(file_path,encoding='utf-8'))
-    context['products'] = Product.objects.all()
+    if pk:
+        context['products'] = Product.objects.filter(category_id=pk)
+    else:
+        context['products'] = Product.objects.all()
+
+
     context['categories'] = ProductCategory.objects.all()
     return render(request, 'mainapp/products.html', context)
 
