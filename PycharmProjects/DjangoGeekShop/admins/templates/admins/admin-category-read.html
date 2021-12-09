@@ -26,7 +26,7 @@
 
                                 <tbody>
 
-                                {% for category in categories %}
+                                {% for category in productcategory_list %}
                                     <tr>
                                         <td>{{ category.name }}</td>
                                         <td>{{ category.description }}</td>
@@ -39,7 +39,7 @@
                                             {% endif %}
                                         </td>
                                         <td>
-                                            <form action="{% url 'admins:admin_category_delete' pk=category.id %}" method="post">
+                                            <form action="{% url 'admins:admin_category_delete' category.id %}" method="post">
                                                 {% csrf_token %}
                                                 <input class="btn btn-danger btn-block" type="submit" value="Удалить">
                                             </form>

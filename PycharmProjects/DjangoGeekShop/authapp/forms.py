@@ -1,13 +1,11 @@
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UserChangeForm
-from django.core.exceptions import ValidationError
+
 from django import forms
 
 from authapp.models import User
-from authapp.validator import validate_name
 
 
 class UserLoginForm(AuthenticationForm):
-    # username = forms.CharField(widget=forms.TextInput(),validators=[validate_name])
     class Meta:
         model = User
         fields = ('username', 'password')
@@ -27,8 +25,6 @@ class UserLoginForm(AuthenticationForm):
 
 
 class UserRegisterForm(UserCreationForm):
-    # username = forms.CharField()
-
     class Meta:
         model = User
         fields = ('username', 'email', 'first_name', 'last_name', 'password1', 'password2')
@@ -46,7 +42,6 @@ class UserRegisterForm(UserCreationForm):
 
 
 class UserProfilerForm(UserChangeForm):
-    # first_name = forms.CharField(widget=forms.TextInput(),validators=[validate_name])
     image = forms.ImageField(widget=forms.FileInput(), required=False)
     age = forms.IntegerField(widget=forms.NumberInput(), required=False)
 
