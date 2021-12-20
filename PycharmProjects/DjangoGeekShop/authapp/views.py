@@ -54,7 +54,7 @@ class RegisterListView(FormView, BaseClassContextMixin):
     def verify(self, email, activate_key):
         try:
             user = User.objects.get(email=email)
-            if user and user.activation_key == activate_key and not user.activation_key_expires():
+            if user and user.activation_key == activate_key and not user.is_activation_key_expires():
                 user.activation_key = ''
                 user.activation_key_expires = None
                 user.is_active = True
