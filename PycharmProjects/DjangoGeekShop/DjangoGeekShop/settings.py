@@ -149,12 +149,12 @@ LOGIN_REDIRECT_URL = '/'
 # EMAIL_USE_SSL = True if os.getenv('EMAIL_USE_SSL') == 'True' else False
 
 
-# EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
-# EMAIL_FILE_PATH = 'tmp/emails/'
-
-# EMAIL_HOST_USER, EMAIL_HOST_PASSWORD = None, None
+# # EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+# # EMAIL_FILE_PATH = 'tmp/emails/'
 #
-
+# EMAIL_HOST_USER, EMAIL_HOST_PASSWORD = None, None
+# #
+#
 
 SOCIAL_AUTH_VK_OAUTH2_KEY = os.getenv('SOCIAL_AUTH_VK_OAUTH2_KEY')
 SOCIAL_AUTH_VK_OAUTH2_SECRET = os.getenv('SOCIAL_AUTH_VK_OAUTH2_SECRET')
