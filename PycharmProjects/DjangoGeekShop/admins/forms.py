@@ -33,25 +33,26 @@ class UserAdminProfileForm(UserProfilerForm):
             field.widget.attrs['class'] = 'form-control py-4'
         self.fields['image'].widget.attrs['class'] = 'custom-file-input'
 
-class CategoryFormAdmin(forms.ModelForm):
-    name = forms.CharField(widget=forms.TextInput())
-    description = forms.CharField(widget=forms.TextInput(), required=False)
+class CategoryUpdateFormAdmin(forms.ModelForm):
+    # name = forms.CharField(widget=forms.TextInput())
+    # description = forms.CharField(widget=forms.TextInput(), required=False)
+    # # is_active = forms.BooleanField(widget=forms.CheckboxInput())
+
 
     class Meta:
         model = ProductCategory
         fields = ('name', 'description')
 
     def __init__(self, *args, **kwargs):
-        super(CategoryFormAdmin, self).__init__(*args, **kwargs)
+        super(CategoryUpdateFormAdmin, self).__init__(*args, **kwargs)
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'form-control py-4'
 
-
-class ProductFormAdmin(forms.ModelForm):
+class ProductsForm(forms.ModelForm):
     category = forms.ModelChoiceField(queryset=ProductCategory.objects.all())
     image = forms.ImageField(widget=forms.FileInput)
 
-    class Meta():
+    class Meta:
         model = Product
         fields = ['name', 'description', 'price', 'quantity', 'category', 'image']
 
@@ -64,12 +65,12 @@ class ProductFormAdmin(forms.ModelForm):
                 field.widget.attrs['class'] = 'form-control py-4'
         self.fields['image'].widget.attrs['class'] = 'custom-file-input'
 
-
-class ProductUpdateFormAdmin(ProductFormAdmin):
-    category = forms.ModelChoiceField(queryset=ProductCategory.objects.all())
+class ProductUpdate(ProductsForm):
+    category = forms.ModelChoiceField(queryset=ProductCategory.objects.all().select_related(),
+                                      empty_label=None)
     image = forms.ImageField(widget=forms.FileInput, required=False)
 
-    class Meta():
+    class Meta:
         model = Product
         fields = ['name', 'description', 'price', 'quantity', 'category', 'image']
 

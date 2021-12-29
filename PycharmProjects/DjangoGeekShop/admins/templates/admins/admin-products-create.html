@@ -5,7 +5,7 @@
         <main>
             <div class="container-fluid">
                 <h1 class="mt-4">Создание продукта</h1>
-                <form action="{% url 'admins:admin_product_create' %}" method="post" enctype="multipart/form-data">
+                <form action="{% url 'admins:admins_product_create' %}" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="form-row">
                         <div class="col-lg-6">
@@ -56,7 +56,7 @@
                         </div>
                         <div class="col-lg-3" style="margin-top: 33px;">
                             <input type="button" class="btn float-lg-right btn-danger btn-block btn-lg"
-                                   onclick="window.location.href = '{% url 'admins:admin_product' %}';"
+                                   onclick="window.location.href = '{% url 'admins:admins_product' %}';"
                                    value="Отмена"/>
                         </div>
                     </div>

@@ -2,13 +2,15 @@ import hashlib
 import random
 
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UserChangeForm
-
+from django.core.exceptions import ValidationError
 from django import forms
 
 from authapp.models import User, UserProfile
+from authapp.validator import validate_name
 
 
 class UserLoginForm(AuthenticationForm):
+    # username = forms.CharField(widget=forms.TextInput(),validators=[validate_name])
     class Meta:
         model = User
         fields = ('username', 'password')
@@ -28,6 +30,8 @@ class UserLoginForm(AuthenticationForm):
 
 
 class UserRegisterForm(UserCreationForm):
+    # username = forms.CharField()
+
     class Meta:
         model = User
         fields = ('username', 'email', 'first_name', 'last_name', 'password1', 'password2')
@@ -51,7 +55,9 @@ class UserRegisterForm(UserCreationForm):
         user.save()
         return user
 
+
 class UserProfilerForm(UserChangeForm):
+    # first_name = forms.CharField(widget=forms.TextInput(),validators=[validate_name])
     image = forms.ImageField(widget=forms.FileInput(), required=False)
     age = forms.IntegerField(widget=forms.NumberInput(), required=False)
 
@@ -70,18 +76,15 @@ class UserProfilerForm(UserChangeForm):
 
 
 class UserProfileEditForm(forms.ModelForm):
-
     class Meta:
         model = UserProfile
         exclude = ('user',)
 
-
-    def __init__(self, *args, **kwargs):
-        super(UserProfileEditForm, self).__init__(*args, **kwargs)
-        for field_name, field in self.fields.items():
+    def __init__(self,*args,**kwargs):
+        super(UserProfileEditForm, self).__init__(*args,**kwargs)
+        for field_name,field in self.fields.items():
             if field_name != 'gender':
                 field.widget.attrs['class'] = 'form-control py-4'
-
             else:
                 field.widget.attrs['class'] = 'form-control'
 

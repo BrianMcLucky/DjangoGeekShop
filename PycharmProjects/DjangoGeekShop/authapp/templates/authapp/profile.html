@@ -9,7 +9,6 @@
 {% block content %}
 
     <div class="container">
-
         <div class="row">
             <div class="col-lg-7">
                 {% if  messages %}
@@ -76,19 +75,18 @@
                             </label>
                             {{ form.age }}
                         </div>
-
                         <div class="col-lg-6">
                             <label class="small mb-1" for="{{ profile.gender.id_for_label }}">Пол
                             </label>
                             {{ profile.gender }}
                         </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <label class="small mb-1" for="{{ profile.lang.id_for_label }}">Язык
-                        </label>
-                        {{ profile.lang }}
-                    </div>
 
+                        <div class="col-lg-6">
+                            <label class="small mb-1" for="{{ profile.langs.id_for_label }}">Язык
+                            </label>
+                            {{ profile.langs }}
+                        </div>
+                    </div>
                     <div class="form-row">
 
                         <div class="col-lg-6">
@@ -96,6 +94,7 @@
                             </label>
                             {{ profile.about }}
                         </div>
+
                     </div>
                     <div class="form-row">
                         <div class="col-lg-12" style="margin-top: 33px;">

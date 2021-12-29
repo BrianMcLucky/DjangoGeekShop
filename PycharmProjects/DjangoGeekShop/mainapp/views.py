@@ -6,9 +6,11 @@ import os
 
 from django.views.generic import DetailView
 
-from mainapp.models import Product,ProductCategory
+from mainapp.models import Product, ProductCategory
 
-MODULE_DIR =os.path.dirname(__file__)
+MODULE_DIR = os.path.dirname(__file__)
+
+
 # Create your views here.
 
 def index(request):
@@ -17,18 +19,18 @@ def index(request):
     return render(request, 'mainapp/index.html', context)
 
 
-def products(request, pk=None,page=1):
+def products(request,id_category=None,page=1):
 
     context = {
         'title': 'Geekshop | Каталог',
     }
 
-    if pk:
-        products = Product.objects.filter(category_id=pk)
+    if id_category:
+        products= Product.objects.filter(category_id=id_category)
     else:
         products = Product.objects.all()
 
-    paginator = Paginator(products, per_page=3)
+    paginator = Paginator(products,per_page=3)
 
     try:
         products_paginator = paginator.page(page)
@@ -37,21 +39,21 @@ def products(request, pk=None,page=1):
     except EmptyPage:
         products_paginator = paginator.page(paginator.num_pages)
 
+
     context['products'] = products_paginator
     context['categories'] = ProductCategory.objects.all()
     return render(request, 'mainapp/products.html', context)
 
 
 class ProductDetail(DetailView):
-
+    """
+    Контроллер вывода информации о продукте
+    """
     model = Product
     template_name = 'mainapp/detail.html'
-    # context_object_name = 'product'
 
-
-    def get_context_data(self, category_id=None, *args, **kwargs):
-        context = super(ProductDetail, self).get_context_data(**kwargs)
-        product = self.get_object()
-        context['product'] = product
-
-        return context
+    # def get_context_data(self, **kwargs):
+    #     context = super(ProductDetail, self).get_context_data(**kwargs)
+    #     product = self.get_object()
+    #     context['product'] = product
+    #     return context
