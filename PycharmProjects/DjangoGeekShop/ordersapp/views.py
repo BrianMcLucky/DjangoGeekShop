@@ -1,3 +1,4 @@
+
 from django.db import transaction
 from django.db.models.signals import pre_save, pre_delete
 from django.dispatch import receiver
@@ -7,21 +8,24 @@ from django.shortcuts import render, get_object_or_404
 
 # Create your views here.
 from django.urls import reverse_lazy, reverse
+
 from django.views.generic import ListView, CreateView, DetailView, DeleteView, UpdateView
 
 from baskets.models import Basket
-from mainapp.mixin import BaseClassContextMixin
+from mainapp.mixin import BaseClassContextMixin, UserDispatchMixin
 from mainapp.models import Product
 from ordersapp.forms import OrderForm, OrderItemsForm
 from ordersapp.models import Order, OrderItem
 
 
-class OrderList(ListView, BaseClassContextMixin):
+class OrderList(ListView, BaseClassContextMixin, UserDispatchMixin):
     model = Order
     title = 'GeekShop | Список заказов'
 
     def get_queryset(self):
         return Order.objects.filter(user=self.request.user, is_active=True)
+
+
 
 
 class OrderCreate(CreateView, BaseClassContextMixin):
