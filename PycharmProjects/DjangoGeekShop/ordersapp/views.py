@@ -12,13 +12,13 @@ from django.urls import reverse_lazy, reverse
 from django.views.generic import ListView, CreateView, DetailView, DeleteView, UpdateView
 
 from baskets.models import Basket
-from mainapp.mixin import BaseClassContextMixin, UserDispatchMixin
+from mainapp.mixin import BaseClassContextMixin
 from mainapp.models import Product
 from ordersapp.forms import OrderForm, OrderItemsForm
 from ordersapp.models import Order, OrderItem
 
 
-class OrderList(ListView, BaseClassContextMixin, UserDispatchMixin):
+class OrderList(ListView, BaseClassContextMixin):
     model = Order
     title = 'GeekShop | Список заказов'
 
@@ -28,7 +28,7 @@ class OrderList(ListView, BaseClassContextMixin, UserDispatchMixin):
 
 
 
-class OrderCreate(CreateView, BaseClassContextMixin, UserDispatchMixin):
+class OrderCreate(CreateView, BaseClassContextMixin):
     model = Order
     fields = []
     success_url = reverse_lazy('orders:list')
@@ -106,13 +106,13 @@ class OrderUpdate(UpdateView):
         return super(OrderUpdate, self).form_valid(form)
 
 
-class OrderDelete(DeleteView, BaseClassContextMixin, UserDispatchMixin):
+class OrderDelete(DeleteView, BaseClassContextMixin):
     model = Order
     success_url = reverse_lazy('orders:list')
     title = 'GeekShop | Удаление заказа'
 
 
-class OrderDetail(DetailView, BaseClassContextMixin, UserDispatchMixin):
+class OrderDetail(DetailView, BaseClassContextMixin):
     model = Order
     title = 'GeekShop | Просмотр заказа'
 
