@@ -28,7 +28,7 @@ class OrderList(ListView, BaseClassContextMixin, UserDispatchMixin):
 
 
 
-class OrderCreate(CreateView, BaseClassContextMixin):
+class OrderCreate(CreateView, BaseClassContextMixin, UserDispatchMixin):
     model = Order
     fields = []
     success_url = reverse_lazy('orders:list')
@@ -106,13 +106,13 @@ class OrderUpdate(UpdateView):
         return super(OrderUpdate, self).form_valid(form)
 
 
-class OrderDelete(DeleteView, BaseClassContextMixin):
+class OrderDelete(DeleteView, BaseClassContextMixin, UserDispatchMixin):
     model = Order
     success_url = reverse_lazy('orders:list')
     title = 'GeekShop | Удаление заказа'
 
 
-class OrderDetail(DetailView, BaseClassContextMixin):
+class OrderDetail(DetailView, BaseClassContextMixin, UserDispatchMixin):
     model = Order
     title = 'GeekShop | Просмотр заказа'
 
