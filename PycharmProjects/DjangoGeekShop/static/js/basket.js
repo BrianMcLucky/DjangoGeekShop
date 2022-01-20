@@ -22,7 +22,7 @@ window.onload = function () {
                 },
             });
         event.preventDefault()
-    //
+
     })
     // var csrf = $('meta[name="csrf-token"]').attr('content');
     // $('.card_add_basket').on('click', 'button[type="button"]', function () {
