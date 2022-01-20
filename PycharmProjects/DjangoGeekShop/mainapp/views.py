@@ -1,7 +1,7 @@
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.shortcuts import render
-
-import json
+from django.conf import settings
+from django.core.cache import cache
 import os
 
 from django.views.generic import DetailView
