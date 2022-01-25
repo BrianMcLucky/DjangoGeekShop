@@ -12,7 +12,7 @@ from mainapp.models import Product, ProductCategory
 MODULE_DIR = os.path.dirname(__file__)
 
 
-# Create your views here.
+
 
 
 def get_link_category():
