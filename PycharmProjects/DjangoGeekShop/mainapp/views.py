@@ -12,9 +12,6 @@ from mainapp.models import Product, ProductCategory
 MODULE_DIR = os.path.dirname(__file__)
 
 
-
-
-
 def get_link_category():
     if settings.LOW_CACHE:
         key = 'link_category'
