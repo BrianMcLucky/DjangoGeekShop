@@ -58,7 +58,7 @@ def index(request):
 
 
 # @cache_page(3600)
-@never_cache()
+@never_cache
 def products(request, id_category=None, page=1):
     context = {
         'title': 'Geekshop | Каталог',
