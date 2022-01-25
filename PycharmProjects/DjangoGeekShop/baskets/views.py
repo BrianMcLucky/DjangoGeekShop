@@ -1,7 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, JsonResponse
 
-
 # Create your views here.
 from django.template.loader import render_to_string
 
