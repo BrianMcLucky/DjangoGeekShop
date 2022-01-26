@@ -1,4 +1,6 @@
 from django.contrib.auth.decorators import login_required
+from django.db import connection
+from django.db.models import F
 from django.http import HttpResponseRedirect, JsonResponse
 
 # Create your views here.
@@ -10,15 +12,19 @@ from mainapp.models import Product
 
 @login_required
 def basket_add(request, id):
-    user_select = request.user
     product = Product.objects.get(id=id)
-    baskets = Basket.objects.filter(user=user_select, product=product)
-    if baskets:
-        basket = baskets.first()
-        basket.quantity += 1
-        basket.save()
+    baskets = Basket.objects.filter(user=request.user, product=product)
+    if not baskets.exists():
+        Basket.objects.create(user=request.user, product=product, quantity=1)
+        # return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     else:
-        Basket.objects.create(user=user_select, product=product, quantity=1)
+        basket = baskets.first()
+        # basket.quantity += 1
+        basket.quantity = F('quantity') + 1
+        basket.save()
+
+        update_queries = list(filter(lambda x: 'UPDATE' in x['sql'], connection.queries))
+        print(f'basket_add{update_queries}')
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
