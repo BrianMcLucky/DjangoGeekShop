@@ -18,6 +18,12 @@ class LoginListView(LoginView, BaseClassContextMixin):
     template_name = 'authapp/login.html'
     form_class = UserLoginForm
     title = 'GeekShop - Авторизация'
+    success_url = reverse_lazy('index')
+
+    def get(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            return HttpResponseRedirect(reverse('index'))
+        return HttpResponseRedirect(reverse('authapp:login'))
 
 
 class RegisterListView(FormView, BaseClassContextMixin):
