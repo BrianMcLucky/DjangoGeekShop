@@ -23,6 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-v#*abackdto0d5mr3et3#+h&)7g)k6%&^a=d@ef-w0%odf^=d9'
 from dotenv import load_dotenv
+
 load_dotenv(BASE_DIR / '.env')
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -140,12 +141,8 @@ STATIC_URL = '/static/'
 # STATICFILES_DIRS = (BASE_DIR / 'static',)
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
-
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
-
-
-
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-fieldcls
@@ -198,4 +195,3 @@ SOCIAL_AUTH_PIPELINE = (
     'social_core.pipeline.social_auth.load_extra_data',
     'social_core.pipeline.user.user_details',
 )
-
